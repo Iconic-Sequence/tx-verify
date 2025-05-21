@@ -1,15 +1,15 @@
 name: my test actions
 
-on:[push]
+on: [push]
 
 jobs:
   testing-action:
     runs-on: ubuntu-latest
     steps:
       - name: step 1
-      - run: echo "step 1"
+        run: echo "step 1"
 
       - name: step 2
-      - run: 
-         echo "step 2"
-         echo "step 3"
+        run: |
+          echo "step 2"
+          echo "step 3"
