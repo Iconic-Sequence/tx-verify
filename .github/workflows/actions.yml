@@ -16,7 +16,7 @@ jobs:
 
       - name: "npm install"
         run: npm install
-        
+
       # authenticate with gcp
       - name: "auth GCP"
         uses: "google-github-actions/auth@v1"
@@ -30,7 +30,7 @@ jobs:
       - name: "exec pulumi"
         uses: "pulumi/actions@v3"
         with:
-          command: preview
+          command: up
           stack-name: dev
        
 
