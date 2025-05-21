@@ -1,4 +1,4 @@
-name: my test actions
+name: create bucket
 
 on: [push]
 
@@ -6,10 +6,33 @@ jobs:
   testing-action:
     runs-on: ubuntu-latest
     steps:
-      - name: step 1
-        run: echo "step 1"
+      # Checkout code
+      - uses: actions/checkout@v3
 
-      - name: step 2
-        run: |
-          echo "step 2"
-          echo "step 3"
+      #set up node
+      - uses: actions/setup-node@v3.5
+        with:
+          node-version: 22
+
+      - name: "npm install"
+        run: npm install
+        
+      # authenticate with gcp
+      - name: "auth GCP"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: "${{ secrets.GCP_TOKEN }}"
+
+      - name: "set project"
+        uses: "google-github-actions/setup-gcloud@v1"
+
+      #pulumi
+      - name: "exec pulumi"
+        uses: "pulumi/actions@v3"
+        with:
+          command: preview
+          stack-name: dev
+       
+
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_TOKEN }}
