@@ -30,7 +30,7 @@ jobs:
       - name: "exec pulumi"
         uses: "pulumi/actions@v3"
         with:
-          command: up
+          command: destroy  
           stack-name: dev
        
 
